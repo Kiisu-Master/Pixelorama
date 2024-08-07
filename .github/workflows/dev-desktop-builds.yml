@@ -52,7 +52,9 @@ jobs:
         continue-on-error: true
         run: godot --headless -v --import
       - name: Windows Build 🔧
-        run: godot --headless -v --export-release "Windows Desktop 64-bit" ./build/${PROJECT_NAME}-Windows-64bit/$PROJECT_NAME.exe
+        run: |
+          mkdir -v -p ./build/${PROJECT_NAME}-Windows-64bit/
+          godot --headless -v --export-release "Windows Desktop 64-bit" ./build/${PROJECT_NAME}-Windows-64bit/$PROJECT_NAME.exe
       - name: Copy pixelorama_data folder 📁
         run: |
           cp -R ./pixelorama_data ./build/${PROJECT_NAME}-Windows-64bit
@@ -79,7 +81,9 @@ jobs:
         run: godot --headless -v --import
       - name: Linux Build 🔧
         run: |
+          mkdir -v -p ./build/${PROJECT_NAME}-Linux-64bit/
           godot --headless -v --export-release "Linux/X11 64-bit" ./build/${PROJECT_NAME}-Linux-64bit/$PROJECT_NAME.x86_64
+          mkdir -v -p ./build/${PROJECT_NAME}-Linux-ARM64/
           godot --headless -v --export-release "Linux/X11 ARM64" ./build/${PROJECT_NAME}-Linux-ARM64/${PROJECT_NAME}.arm64
       - name: Give execute permission ☑️
         run: |
